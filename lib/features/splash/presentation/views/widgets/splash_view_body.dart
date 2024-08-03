@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fresh_fruits/constants.dart';
+import 'package:fresh_fruits/core/utility/app_router.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -21,8 +23,9 @@ class _SplashViewBodyState extends State<SplashViewBody>  with SingleTickerProvi
     super.initState();
     initController();
     initAnimation();
-    
     _controller.forward();
+    Future.delayed( const Duration(milliseconds: 2500),() => GoRouter.of(context).push(AppRouter.onboardingViewPath),);
+
   }
   @override
   void dispose() {
