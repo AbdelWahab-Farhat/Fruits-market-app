@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fresh_fruits/constants.dart';
+import 'package:fresh_fruits/core/utility/app_router.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
 import 'package:fresh_fruits/core/widgets/custom_filled_button.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/widgets/custom_page_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'custom_page_view_item.dart';
@@ -57,15 +58,15 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
                   dotHeight: 5, dotWidth: 23, activeDotColor: G0),
             ),
             const Expanded(
-                child: SizedBox(
-            )),
+              child: SizedBox(
+                width: 20,
+                          ),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28),
               child: CustomFilledButton(
                 title: 'Next',
-                onTap: () => pageController.nextPage(
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.linear),
+                onTap: ()=> pageButtonAction(context),
               ),
             ),
             const SizedBox(
@@ -75,5 +76,14 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
         ),
       ),
     );
+  }
+
+  void pageButtonAction(BuildContext context) {
+    pageController.nextPage(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.linear);
+    if (pageController.page == items.length - 1) {
+      GoRouter.of(context).pushReplacement(AppRouter.signInViewPath);
+    }
   }
 }

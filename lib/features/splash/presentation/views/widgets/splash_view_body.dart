@@ -24,7 +24,7 @@ class _SplashViewBodyState extends State<SplashViewBody>  with SingleTickerProvi
     initController();
     initAnimation();
     _controller.forward();
-    Future.delayed( const Duration(milliseconds: 2500),() => GoRouter.of(context).push(AppRouter.onboardingViewPath),);
+    Future.delayed( const Duration(milliseconds: 2500),() => GoRouter.of(context).pushReplacement(AppRouter.onboardingViewPath),);
 
   }
   @override
