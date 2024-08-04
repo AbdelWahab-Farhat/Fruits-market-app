@@ -4,9 +4,10 @@ import 'package:google_fonts/google_fonts.dart';
 abstract class AppStyle {
 
 
-  static const style14 = TextStyle(
+  static final style14 = TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.w400,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     color: Colors.black,
   );
   static final style16 = TextStyle(
