@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_fruits/core/utility/app_router.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utility/app_style.dart';
@@ -26,7 +28,7 @@ class SignInSection extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text('Forget Password ?',style: AppStyle.style14.copyWith(color: kOrange),)),
           const Expanded(child: SizedBox(height: 20,)),
-          const CustomFilledButton(title: 'Sign In'),
+           CustomFilledButton(title: 'Sign In',onTap: () => GoRouter.of(context).go(AppRouter.homeView),),
           const SizedBox(height: 10,),
           const ToggleBetweenAuthButton(isSignInView: true,),
         ],
