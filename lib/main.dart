@@ -14,7 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig.initSizeConfig(context);
     return  MaterialApp.router(
-      theme: ThemeData(fontFamily: GoogleFonts.inter().fontFamily),
+      theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xffFAFEFC),
+          fontFamily: GoogleFonts.inter().fontFamily),
       debugShowCheckedModeBanner: false,
       routerConfig: AppRouter.appRouter,
     );
