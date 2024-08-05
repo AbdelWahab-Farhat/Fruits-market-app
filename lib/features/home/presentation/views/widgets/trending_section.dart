@@ -19,7 +19,7 @@ class TrendingSection extends StatelessWidget {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
-      itemCount: 5,
+      itemCount: 4,
       itemBuilder: (context, index) {
         return const TrendingItemSection();
       },
