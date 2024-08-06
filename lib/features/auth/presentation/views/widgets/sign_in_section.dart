@@ -28,7 +28,7 @@ class SignInSection extends StatelessWidget {
               alignment: Alignment.centerRight,
               child: Text('Forget Password ?',style: AppStyle.style14.copyWith(color: kOrange),)),
           const Expanded(child: SizedBox(height: 20,)),
-           CustomFilledButton(title: 'Sign In',onTap: () => GoRouter.of(context).go(AppRouter.homeView),),
+           CustomFilledButton(title: 'Sign In',onTap: () => GoRouter.of(context).go(AppRouter.categoriesView),),
           const SizedBox(height: 10,),
           const ToggleBetweenAuthButton(isSignInView: true,),
         ],
