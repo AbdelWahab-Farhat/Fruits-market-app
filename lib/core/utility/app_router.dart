@@ -1,5 +1,6 @@
 import 'package:fresh_fruits/features/auth/presentation/views/sign_in_view.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_up_view.dart';
+import 'package:fresh_fruits/features/categories/presentation/views/categories_view.dart';
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fresh_fruits/features/splash/presentation/views/splash_view.dart';
@@ -12,6 +13,8 @@ abstract class AppRouter {
   static const String signInViewPath = '/sign_in_view';
   static const String signUpViewPath = '/sign_up_view';
   static const String homeView = '/home_view';
+  static const String categoriesView = '/categories_view';
+
 
 
   static final appRouter = GoRouter(
@@ -35,6 +38,10 @@ abstract class AppRouter {
       GoRoute(
         path: homeView,
         builder: (context, state) => const HomeView(),
+      ),
+      GoRoute(
+        path: categoriesView,
+        builder: (context, state) => const CategoriesView(),
       ),
     ],
   );
