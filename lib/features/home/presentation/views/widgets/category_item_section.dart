@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/enums/category_item.dart';
+import '../../../../../core/models/category_item.dart';
 
 class CategoryItemSection extends StatelessWidget {
   final CategoryItem category;

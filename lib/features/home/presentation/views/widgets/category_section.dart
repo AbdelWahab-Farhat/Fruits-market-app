@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/enums/category_item.dart';
+import '../../../../../core/models/category_item.dart';
 import '../../../../../core/utility/size_config.dart';
 import 'category_item_section.dart';
 
