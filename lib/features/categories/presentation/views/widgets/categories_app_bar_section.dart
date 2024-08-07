@@ -5,8 +5,8 @@ import '../../../../../core/utility/size_config.dart';
 import '../../../../../core/widgets/custom_pop_arrow.dart';
 
 
-class AppbarSection extends StatelessWidget implements PreferredSizeWidget{
-  const AppbarSection({
+class CategoriesAppBarSection extends StatelessWidget implements PreferredSizeWidget{
+  const CategoriesAppBarSection({
     super.key,
   });
 
@@ -23,6 +23,5 @@ class AppbarSection extends StatelessWidget implements PreferredSizeWidget{
   }
 
   @override
-  // TODO: implement preferredSize
   Size get preferredSize =>  Size(SizeConfig.viewWidth! , kToolbarHeight);
 }

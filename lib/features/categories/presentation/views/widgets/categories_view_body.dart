@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/widgets/categories_grid_view.dart';
-import 'app_bar_section.dart';
+import 'categories_app_bar_section.dart';
 
 class CategoriesViewBody extends StatelessWidget {
   const CategoriesViewBody({super.key});
@@ -9,7 +9,7 @@ class CategoriesViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppbarSection(),
+      appBar: CategoriesAppBarSection(),
       body: CategoriesGridView(),
     );
   }
