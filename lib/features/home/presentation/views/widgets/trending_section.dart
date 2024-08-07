@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'trending_item_section.dart';
+import '../../../../../core/widgets/custom_grid_view_item.dart';
 
 class TrendingSection extends StatelessWidget {
   const TrendingSection({
@@ -21,7 +21,7 @@ class TrendingSection extends StatelessWidget {
       ),
       itemCount: 4,
       itemBuilder: (context, index) {
-        return const TrendingItemSection();
+        return const CustomGridViewItem();
       },
     );
   }
