@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/utility/app_style.dart';
+import '../utility/app_style.dart';
 
-class TrendingItemSection extends StatelessWidget {
+class CustomGridViewItem extends StatelessWidget {
 
-  const TrendingItemSection({super.key,});
+  const CustomGridViewItem({super.key,});
 
   @override
   Widget build(BuildContext context) {
