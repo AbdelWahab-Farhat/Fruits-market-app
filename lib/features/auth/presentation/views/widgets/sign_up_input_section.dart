@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter/material.dart';
-
 import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class SignUpInputSection extends StatelessWidget {

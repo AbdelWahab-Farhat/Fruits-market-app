@@ -34,6 +34,7 @@ class CustomFilledButton extends StatelessWidget {
           title,
           style: AppStyle.style16
               .copyWith(color: color != null ? Colors.white : null),
+              textAlign: TextAlign.center,
         )),
       ),
     );

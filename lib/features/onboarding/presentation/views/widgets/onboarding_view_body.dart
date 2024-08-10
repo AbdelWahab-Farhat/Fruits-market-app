@@ -55,7 +55,7 @@ class _OnboardingViewBodyState extends State<OnboardingViewBody> {
               controller: pageController,
               count: items.length,
               effect: const WormEffect(
-                  dotHeight: 5, dotWidth: 23, activeDotColor: G0),
+                  dotHeight: 5, dotWidth: 23, activeDotColor: g0),
             ),
             const Expanded(
               child: SizedBox(

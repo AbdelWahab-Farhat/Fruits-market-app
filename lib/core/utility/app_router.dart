@@ -3,6 +3,7 @@ import 'package:fresh_fruits/features/auth/presentation/views/sign_up_view.dart'
 import 'package:fresh_fruits/features/categories/presentation/views/categories_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/category_view.dart';
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
+import 'package:fresh_fruits/features/item_details/presentation/views/item_details_view.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fresh_fruits/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ abstract class AppRouter {
   static const String homeView = '/home_view';
   static const String categoriesView = '/categories_view';
   static const String categoryView = '/category_view';
+  static const String itemDetailsView = '/item_details_view';
 
 
 
@@ -48,6 +50,10 @@ abstract class AppRouter {
       GoRoute(
         path: categoryView,
         builder: (context, state) => const CategoryView(),
+      ),
+      GoRoute(
+        path: itemDetailsView,
+        builder: (context, state) => const ItemDetailsView(),
       ),
     ],
   );
