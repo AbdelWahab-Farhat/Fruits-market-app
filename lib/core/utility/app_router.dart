@@ -1,5 +1,6 @@
 import 'package:fresh_fruits/features/auth/presentation/views/sign_in_view.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_up_view.dart';
+import 'package:fresh_fruits/features/cart/presentation/views/cart_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/categories_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/category_view.dart';
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
@@ -18,6 +19,7 @@ abstract class AppRouter {
   static const String categoriesView = '/categories_view';
   static const String categoryView = '/category_view';
   static const String itemDetailsView = '/item_details_view';
+  static const String cartView = '/cart_view';
 
 
 
@@ -54,6 +56,10 @@ abstract class AppRouter {
       GoRoute(
         path: itemDetailsView,
         builder: (context, state) => const ItemDetailsView(),
+      ),
+      GoRoute(
+        path: cartView,
+        builder: (context, state) => const CartView(),
       ),
     ],
   );
