@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_fruits/core/utility/app_style.dart';
+import 'package:fresh_fruits/core/widgets/custom_cached_image.dart';
 
-class PromoItemSection extends StatelessWidget {
-  const PromoItemSection({
+import '../../../../../core/models/item.dart';
+
+class PromoItemsSection extends StatelessWidget {
+  final Item item;
+  const PromoItemsSection({
     super.key,
+    required this.item,
   });
 
   @override
@@ -18,10 +23,7 @@ class PromoItemSection extends StatelessWidget {
           ),
           child: AspectRatio(
             aspectRatio: 1.7 / 1,
-            child: Image.asset(
-              'lib/assets/images/promo-food-1.png',
-              fit: BoxFit.cover,
-            ),
+            child: CustomCachedImage(imageURL: item.imageURL),
           ),
         ),
         Container(
