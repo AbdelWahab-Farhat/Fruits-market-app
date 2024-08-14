@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
 import 'package:fresh_fruits/core/widgets/custom_filled_button.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/widgets/review_widget.dart';
+import '../../../../../core/models/item.dart';
 import '../../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../../core/widgets/price_section.dart';
 import '../../../../../core/widgets/title_section.dart';
@@ -9,7 +10,8 @@ import 'custom_tab_bar.dart';
 import 'header_section.dart';
 
 class ItemDetailsViewBody extends StatelessWidget {
-  const ItemDetailsViewBody({super.key});
+  final Item item;
+  const ItemDetailsViewBody({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
