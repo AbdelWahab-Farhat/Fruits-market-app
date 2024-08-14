@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
 
+import '../../../../../core/models/item.dart';
 import 'category_app_bar_section.dart';
 import 'category_search_section.dart';
 
 class CategoryViewBody extends StatelessWidget {
-  const CategoryViewBody({super.key});
+  final List<Item> items;
+  const CategoryViewBody({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,10 @@ class CategoryViewBody extends StatelessWidget {
         child: SizedBox(
           height: SizeConfig.viewHeight,
           width: SizeConfig.viewWidth,
-          child: const Stack(
+          child:  Stack(
             children: [
-              CategoryAppBarSection(),
-              CategorySearchSection(),
+               CategoryAppBarSection(items: items,),
+              CategorySearchSection(items: items,),
             ],
           ),
         ),

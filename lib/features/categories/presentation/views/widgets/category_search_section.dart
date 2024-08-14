@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../constants.dart';
+import '../../../../../core/models/item.dart';
 import '../../../../../core/utility/size_config.dart';
 import 'category_grid_view.dart';
 import 'custom_search_bar.dart';
 
 
 class CategorySearchSection extends StatelessWidget {
+  final List<Item> items;
   const CategorySearchSection({
-    super.key,
+    super.key, required this.items,
   });
 
   @override
@@ -27,12 +29,12 @@ class CategorySearchSection extends StatelessWidget {
             topLeft: Radius.circular(topRadius),
           ),
         ),
-        child: const SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+        child:  SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              CustomSearchBar(),
-              CategoryGridView()
+              const CustomSearchBar(),
+              CategoryGridView(items: items,)
             ],
           ),
         ),

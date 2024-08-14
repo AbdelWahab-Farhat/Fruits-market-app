@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/models/item.dart';
 import 'widgets/category_view_body.dart';
 
 class CategoryView extends StatelessWidget {
-  const CategoryView({super.key});
+  final List<Item> items;
+  const CategoryView({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
-    return const CategoryViewBody();
+    return  CategoryViewBody(items: items,);
   }
 }

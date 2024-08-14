@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../core/models/item.dart';
 import '../../../../../core/widgets/custom_grid_view_item.dart';
-
 class CategoryGridView extends StatelessWidget {
+  final List<Item> items;
   const CategoryGridView({
-    super.key,
+    super.key, required this.items,
   });
 
   @override
@@ -21,9 +22,9 @@ class CategoryGridView extends StatelessWidget {
         crossAxisSpacing: axisSpacing,
         mainAxisSpacing: axisSpacing,
       ),
-      itemCount: 6,
+      itemCount: items.length,
       itemBuilder: (context, index) {
-        return const CustomGridViewItem();
+        return  CustomGridViewItem(item: items[index],);
       },
     );
   }
