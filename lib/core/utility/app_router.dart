@@ -1,3 +1,4 @@
+import 'package:fresh_fruits/core/models/item.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_in_view.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_up_view.dart';
 import 'package:fresh_fruits/features/cart/presentation/views/cart_view.dart';
@@ -6,6 +7,7 @@ import 'package:fresh_fruits/features/categories/presentation/views/category_vie
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/item_details_view.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:fresh_fruits/features/root/root.dart';
 import 'package:fresh_fruits/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +22,7 @@ abstract class AppRouter {
   static const String categoryView = '/category_view';
   static const String itemDetailsView = '/item_details_view';
   static const String cartView = '/cart_view';
+  static const String rootView = '/root_view';
 
 
 
@@ -51,15 +54,25 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: categoryView,
-        builder: (context, state) => const CategoryView(),
+        builder: (context, state) {
+          final items = state.extra as List<Item>?; // Use `extra` to pass the list
+          return CategoryView(items: items ?? []); // Provide a default empty list if items is null
+        },
       ),
       GoRoute(
         path: itemDetailsView,
-        builder: (context, state) => const ItemDetailsView(),
+        builder: (context, state) {
+          final item = state.extra as Item;
+          return  ItemDetailsView(item: item);
+        },
       ),
       GoRoute(
         path: cartView,
         builder: (context, state) => const CartView(),
+      ),
+      GoRoute(
+        path: rootView,
+        builder: (context, state) =>  Root(),
       ),
     ],
   );
