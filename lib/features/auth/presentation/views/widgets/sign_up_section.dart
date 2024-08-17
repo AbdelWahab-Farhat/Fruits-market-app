@@ -1,9 +1,8 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import '../../../../../constants.dart';
+import 'package:fresh_fruits/features/auth/presentation/views/widgets/sign_up_button.dart';
 import '../../../../../core/utility/app_style.dart';
-import '../../../../../core/widgets/custom_filled_button.dart';
 import 'sign_up_input_section.dart';
+import 'terms_and_conditions.dart';
 import 'toggle_between_auth_button.dart';
 
 class SignUpSection extends StatelessWidget {
@@ -13,55 +12,40 @@ class SignUpSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 28, right: 28, top: 28, bottom: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Sign Up',
-            style: AppStyle.style20,
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-          const SignUpInputSection(),
-          const SizedBox(
-            height: 12,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 50),
-            child: RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: AppStyle.style14,
-                children: [
-                  const TextSpan(text: 'By tapping Sign up you accept all '),
-                  TextSpan(
-                    text: 'terms and conditions',
-                    style: AppStyle.style14.copyWith(color: kOrange),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                      },
-                  ),
-                ],
-              ),
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 28,left:  28 , top: 20),
+            child: Text(
+              'Sign Up',
+              style: AppStyle.style20,
             ),
           ),
-          const Expanded(
-            child: SizedBox(
-              height: 20,
+        ),
+
+        const SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SignUpInputSection(),
+                SizedBox(height: 12),
+                TermsAndConditions(),
+                Expanded(child: SizedBox(height: 20)),
+                SignUpButton(),
+                SizedBox(height: 10),
+                ToggleBetweenAuthButton(
+                  isSignInView: false,
+                ),
+              ],
             ),
           ),
-          const CustomFilledButton(title: 'Sign Up'),
-          const SizedBox(
-            height: 10,
-          ),
-          const ToggleBetweenAuthButton(
-            isSignInView: false,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
+

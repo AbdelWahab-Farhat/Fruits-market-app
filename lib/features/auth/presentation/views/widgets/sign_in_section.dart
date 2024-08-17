@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fresh_fruits/core/utility/app_router.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../../constants.dart';
+import 'package:fresh_fruits/features/auth/presentation/views/widgets/sign_in_button.dart';
 import '../../../../../core/utility/app_style.dart';
-import '../../../../../core/widgets/custom_filled_button.dart';
+import 'forget_password_button.dart';
 import 'sign_in_input_section.dart';
 import 'toggle_between_auth_button.dart';
 
@@ -15,25 +12,38 @@ class SignInSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 28,right: 28,top: 28,bottom: 40),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Sign In',style: AppStyle.style20,),
-          const SizedBox(height: 32,),
-          const SignInInputSection(),
-          const SizedBox(height: 12,),
-          Align(
-              alignment: Alignment.centerRight,
-              child: Text('Forget Password ?',style: AppStyle.style14.copyWith(color: kOrange),)),
-          const Expanded(child: SizedBox(height: 20,)),
-           CustomFilledButton(title: 'Sign In',onTap: () => GoRouter.of(context).go(AppRouter.rootView),),
-          const SizedBox(height: 10,),
-          const ToggleBetweenAuthButton(isSignInView: true,),
-        ],
-      ),
+    return  CustomScrollView(
+      physics: const NeverScrollableScrollPhysics(),
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(right: 28,left:  28 , top: 20 , bottom: 32),
+            child: Text('Sign In', style: AppStyle.style20,),
+          ),
+        ),
+         const SliverFillRemaining(
+          hasScrollBody: false,
+          child: Padding(
+            padding: EdgeInsets.only(left: 28,right: 28,bottom: 32),
+            child: Column(
+              children: [
+                SignInInputSection(),
+                SizedBox(height: 10,),
+                ForgetPasswordButton(),
+                SizedBox(height: 12,),
+                Expanded(child: SizedBox(height: 10,)),
+                SignInButton(),
+                SizedBox(height: 20,),
+                ToggleBetweenAuthButton(isSignInView: true,),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
+
+
+
 
