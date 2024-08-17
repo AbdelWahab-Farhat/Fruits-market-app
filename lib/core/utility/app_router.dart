@@ -1,4 +1,5 @@
 import 'package:fresh_fruits/core/models/item.dart';
+import 'package:fresh_fruits/features/auth/presentation/views/forget_password_view.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_in_view.dart';
 import 'package:fresh_fruits/features/auth/presentation/views/sign_up_view.dart';
 import 'package:fresh_fruits/features/cart/presentation/views/cart_view.dart';
@@ -21,6 +22,7 @@ abstract class AppRouter {
   static const String categoriesView = '/categories_view';
   static const String categoryView = '/category_view';
   static const String itemDetailsView = '/item_details_view';
+  static const String forgetPasswordView = '/forget_password_view';
   static const String cartView = '/cart_view';
   static const String rootView = '/root_view';
 
@@ -39,6 +41,10 @@ abstract class AppRouter {
       GoRoute(
         path: signInViewPath,
         builder: (context, state) => const SignInView(),
+      ),
+      GoRoute(
+        path: forgetPasswordView,
+        builder: (context, state) => const ForgetPasswordView(),
       ),
       GoRoute(
         path: signUpViewPath,
