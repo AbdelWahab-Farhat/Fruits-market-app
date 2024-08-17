@@ -41,6 +41,14 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       borderRadius: BorderRadius.circular(32),
       borderSide: const BorderSide(color: Color(0xffCACACA)),
     );
+    OutlineInputBorder errorBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(32),
+      borderSide: const BorderSide(color: Color(0xffFF5252)),
+    );
+    OutlineInputBorder focusedErrorBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(32),
+      borderSide: const BorderSide(color: Color(0xffab0606)),
+    );
 
     return TextFormField(
       obscureText: _isPassword,
@@ -51,6 +59,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         hintText: widget.hint,
         focusedBorder: focusedBorder,
         enabledBorder: enabledBorder,
+        errorBorder: errorBorder,
+        focusedErrorBorder: errorBorder,
         suffixIcon: widget.svgIconUrl != null
             ? GestureDetector(
           onTap: () {
