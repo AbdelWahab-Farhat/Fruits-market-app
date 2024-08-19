@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fresh_fruits/features/categories/presentation/viewModel/search_cubit/search_cubit.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utility/app_style.dart';
@@ -14,6 +16,9 @@ class CustomSearchBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 28),
       child: TextField(
+        onChanged: (value) {
+        context.read<SearchCubit>().searchItems(value);
+        },
         style: AppStyle.style16,
         maxLines: 1,
         decoration: InputDecoration(

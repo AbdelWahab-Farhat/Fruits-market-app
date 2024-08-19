@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
-
-import '../../../../../core/models/item.dart';
+import 'package:fresh_fruits/features/categories/presentation/viewModel/search_cubit/search_cubit.dart';
 import 'category_app_bar_section.dart';
 import 'category_search_section.dart';
 
 class CategoryViewBody extends StatelessWidget {
-  final List<Item> items;
-  const CategoryViewBody({super.key, required this.items});
+  const CategoryViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var searchCubit = context.read<SearchCubit>();
     return Scaffold(
       resizeToAvoidBottomInset:
           false,
@@ -23,8 +23,8 @@ class CategoryViewBody extends StatelessWidget {
           width: SizeConfig.viewWidth,
           child:  Stack(
             children: [
-               CategoryAppBarSection(items: items,),
-              CategorySearchSection(items: items,),
+               CategoryAppBarSection(items: searchCubit.allItems,),
+              const CategorySearchSection(),
             ],
           ),
         ),

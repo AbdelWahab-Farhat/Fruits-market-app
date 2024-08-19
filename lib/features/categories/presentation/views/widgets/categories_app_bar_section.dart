@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fresh_fruits/constants.dart';
 
 import '../../../../../core/utility/app_style.dart';
 import '../../../../../core/utility/size_config.dart';
-import '../../../../../core/widgets/custom_pop_arrow.dart';
 
 
 class CategoriesAppBarSection extends StatelessWidget implements PreferredSizeWidget{
@@ -16,9 +16,8 @@ class CategoriesAppBarSection extends StatelessWidget implements PreferredSizeWi
       elevation: 0.5,
       shadowColor: Colors.black,
       title: Text('Categories',style: AppStyle.style20,),
-      backgroundColor: Colors.white,
+      backgroundColor: kLightYellow.withOpacity(0.35),
       centerTitle: true,
-      leading: const CustomPopArrow(color: Colors.black),
     );
   }
 
