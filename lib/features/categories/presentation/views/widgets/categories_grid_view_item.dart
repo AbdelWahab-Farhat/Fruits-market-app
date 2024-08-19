@@ -4,21 +4,20 @@ import 'package:fresh_fruits/core/utility/app_router.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../constants.dart';
-import '../../../../../core/models/category_item.dart';
+import '../../../../../core/models/item.dart';
 import '../../../../../core/utility/app_style.dart';
 
 class CategoriesGridViewItem extends StatelessWidget {
   const CategoriesGridViewItem({
     super.key,
-    required this.categoryItem,
+    required this.itemsByCategory,
   });
-
-  final CategoryItem categoryItem;
-
+  final List<Item> itemsByCategory;
   @override
   Widget build(BuildContext context) {
+    var categoryItem = itemsByCategory.first.category;
     return GestureDetector(
-      onTap: () => GoRouter.of(context).push(AppRouter.categoryView),
+      onTap: () => GoRouter.of(context).push(AppRouter.categoryView,extra: itemsByCategory),
       child: Container(
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.only(top: 22,bottom: 5),
@@ -43,7 +42,7 @@ class CategoriesGridViewItem extends StatelessWidget {
               ),
               const SizedBox(height: 10,),
               Text(categoryItem.name,style: AppStyle.style20.copyWith(color: kOrange),),
-              Text('88 Items',style: AppStyle.style14.copyWith(color: kOrange,fontWeight: FontWeight.bold),)
+              Text('${itemsByCategory.length} Items',style: AppStyle.style14.copyWith(color: kOrange,fontWeight: FontWeight.bold),)
             ],
           )
       ),

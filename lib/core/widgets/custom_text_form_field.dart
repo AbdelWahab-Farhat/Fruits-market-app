@@ -60,7 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedBorder: focusedBorder,
         enabledBorder: enabledBorder,
         errorBorder: errorBorder,
-        focusedErrorBorder: errorBorder,
+        focusedErrorBorder: focusedErrorBorder,
         suffixIcon: widget.svgIconUrl != null
             ? GestureDetector(
           onTap: () {
