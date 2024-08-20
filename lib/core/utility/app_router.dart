@@ -8,6 +8,7 @@ import 'package:fresh_fruits/features/categories/presentation/views/category_vie
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/item_details_view.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/onboarding_view.dart';
+import 'package:fresh_fruits/features/profile/presentation/views/profile_view.dart';
 import 'package:fresh_fruits/features/root/root.dart';
 import 'package:fresh_fruits/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -24,6 +25,7 @@ abstract class AppRouter {
   static const String itemDetailsView = '/item_details_view';
   static const String forgetPasswordView = '/forget_password_view';
   static const String cartView = '/cart_view';
+  static const String profileView = '/profile_view';
   static const String rootView = '/root_view';
 
 
@@ -78,8 +80,11 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: rootView,
-        builder: (context, state) =>  Root(),
+        builder: (context, state) =>  const Root(),
       ),
-    ],
+      GoRoute(
+        path: profileView,
+        builder: (context, state) =>  const ProfileView(),
+      ),    ],
   );
 }
