@@ -3,12 +3,12 @@ import 'package:fresh_fruits/constants.dart';
 import 'package:fresh_fruits/features/cart/presentation/views/cart_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/categories_view.dart';
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
+import 'package:fresh_fruits/features/profile/presentation/views/profile_view.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 
 class Root extends StatefulWidget {
-
-   Root({super.key});
+   const Root({super.key});
 
   @override
   State<Root> createState() => _RootState();
@@ -21,6 +21,7 @@ class _RootState extends State<Root> {
     const HomeView(),
     const CategoriesView(),
     const CartView(),
+    const ProfileView()
   ];
 
   @override
@@ -43,7 +44,7 @@ class _RootState extends State<Root> {
           iconSize: 24, // tab button icon size
           tabBackgroundColor: Colors.orange.withOpacity(0.1), // selected tab background color
           tabMargin: const EdgeInsets.only(left: 10 , right: 10),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           tabs: const [
             GButton(
               icon: Icons.home,
@@ -57,6 +58,7 @@ class _RootState extends State<Root> {
               icon: Icons.shopping_cart,
               text: 'Cart',
             ),
+            GButton(icon: Icons.person, text: 'Profile'),
           ]
       ),
       body: _views[_selectedIndex],
