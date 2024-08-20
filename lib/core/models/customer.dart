@@ -5,6 +5,7 @@ class Customer {
   final String firstName;
   final String lastName;
   final String email;
+  final String image;
   final List<Order>? orders;
 
   Customer({
@@ -13,7 +14,7 @@ class Customer {
     required this.lastName,
     required this.email,
     this.orders,  // List<Order> is nullable
-  });
+  }) : image = 'assets/images/user.png';
 
   Map<String, dynamic> toJson() {
     return {
