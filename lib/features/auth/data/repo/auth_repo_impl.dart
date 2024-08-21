@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fresh_fruits/core/error/failure.dart';
 import 'package:fresh_fruits/core/firebase/firestore_service.dart';
+import 'package:fresh_fruits/core/models/customer.dart';
 import 'package:fresh_fruits/features/auth/data/repo/auth_repo.dart';
 
 class AuthRepoImpl extends AuthRepo {
@@ -19,10 +21,11 @@ class AuthRepoImpl extends AuthRepo {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       // Try to add user info to the database
-      var result = await FireStoreService().addUserInfoToDataBase(
+      var result = await FireStoreService.addUserInfoToDataBase(
         firstName: firstName,
         lastName: lastName,
         email: email,
+        ID: userCredential.user!.uid,
       );
 
       // If adding user info fails, delete the auth info
@@ -52,10 +55,10 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<Failure, String>> signIn({required String email, required String password}) async {
+  Future<Either<Failure, Customer>> signIn({required String email, required String password}) async {
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      return right('Sign In Successfully');
+      var doc = await FirebaseFirestore.instance.collection(FireStoreService.users_Collection).doc(FirebaseAuth.instance.currentUser!.uid).get();
+      return right(Customer.fromJson(doc.data() as Map<String, dynamic>));
     } on FirebaseAuthException {
       return left(ServerFailure(errMessage: 'An unknown error occurred , Please Try Again Later.'));
 
