@@ -5,7 +5,7 @@ import 'package:fresh_fruits/constants.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fresh_fruits/core/utility/app_style.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
-import 'package:fresh_fruits/core/widgets/quantity_widget.dart';
+import 'package:fresh_fruits/features/cart/presentation/views/widgets/quantity_cart.dart';
 import 'app_bar_section.dart';
 
 class CartViewBody extends StatelessWidget {
@@ -47,7 +47,7 @@ class CartViewBody extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      QuantityWidget(),
+                      QuantityCart(),
                       SizedBox(
                         height: 5,
                       )
