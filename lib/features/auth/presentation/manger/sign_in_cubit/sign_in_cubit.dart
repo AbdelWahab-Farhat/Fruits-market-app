@@ -35,7 +35,7 @@ class SignInCubit extends Cubit<SignInState> {
     );
   }
 
-  void setCustomer(Customer customer) {
-    customer = customer;
+  void setCustomer(Customer cust) {
+    customer = cust;
   }
 }

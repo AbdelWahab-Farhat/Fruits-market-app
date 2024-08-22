@@ -27,15 +27,12 @@ class SignInViewBody extends StatelessWidget {
               if (userSnapshot.hasError) {
                 return const Center(child: Text('Error fetching user data'));
               }
-
               if (userSnapshot.hasData && userSnapshot.data != null) {
-                // Update the customer in the Cubit if not already set
                 final customer = userSnapshot.data!;
                 final signInCubit = context.read<SignInCubit>();
                 if (signInCubit.customer == null) {
                   signInCubit.setCustomer(customer); // Better to use a method within the Cubit to set customer
                 }
-
                 return const Root();
               }
 
