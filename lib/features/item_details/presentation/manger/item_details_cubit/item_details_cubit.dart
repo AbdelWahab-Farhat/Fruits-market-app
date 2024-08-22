@@ -4,12 +4,14 @@ import 'package:meta/meta.dart';
 
 import '../../../../../core/models/customer.dart';
 import '../../../../../core/models/item.dart';
+import '../../../data/models/comment.dart';
 
 part 'item_details_state.dart';
 
 class ItemDetailsCubit extends Cubit<ItemDetailsState> {
   final Item item;
   final ItemDetailsRepo itemDetailsRepo;
+  List<Comment>? itemComments;
   int quantity = 1;
   ItemDetailsCubit({required this.itemDetailsRepo, required this.item})
       : super(ItemDetailsInitial());
@@ -38,14 +40,29 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
     }
   }
 
-  void postComment(String content, Customer customer, Item item) async {
+  void postComment(String content, Customer customer) async {
     emit(ItemDetailsCommentLoading());
     var result = await itemDetailsRepo.postComment(content, customer, item);
     result.fold(
       (failure) =>
           emit(ItemDetailsCommentFailed(errMessage: failure.errMessage)),
-      (successMessage) =>
-          emit(ItemDetailsCommentPosted(successMessage: successMessage)),
+      (successMessage) {
+        emit(ItemDetailsCommentPosted(successMessage: successMessage));
+      },
     );
+      await fetchComments();
   }
+
+  Future<void> fetchComments() async {
+    emit(ItemDetailsCommentLoading());
+      var result = await itemDetailsRepo.getItemComments(item);
+      result.fold(
+        (failure) =>
+            emit(ItemDetailsCommentFailed(errMessage: failure.errMessage)),
+        (comments) {
+          itemComments = comments;
+          emit((ItemDetailsCommentPosted(successMessage: '')));
+        },
+      );
+    }
 }

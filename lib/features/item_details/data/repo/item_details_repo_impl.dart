@@ -51,4 +51,16 @@ class ItemDetailsRepoImpl extends ItemDetailsRepo {
       return left(ServerFailure(errMessage: 'Unexpected error: $e'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Comment>?>> getItemComments(Item item) async {
+    try {
+      var query = await FirebaseFirestore.instance.collection(FireStoreService.items_Collection).doc(item.ID).get();
+      print(query.data().toString());
+       Item ite = Item.fromJson(query.data() as Map<String, dynamic>);
+      return right(ite.comments);
+    } on FirebaseException catch (e) {
+      return left(ServerFailure(errMessage: e.message ?? e.code));
+    }
+  }
 }
