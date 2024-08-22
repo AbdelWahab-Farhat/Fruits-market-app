@@ -128,3 +128,16 @@ List<Item> itemsByCategory(List<Item> items, CategoryItem category) {
       .where((element) => element.category.name == category.name)
       .toList();
 }
+
+  String getTimeBasedGreeting()  {
+  var time = DateTime.now();
+  int hour = time.hour;
+  if (hour < 12) {
+    return 'Good Morning';
+  } else if (hour < 17) {
+    return 'Good Afternoon';
+  } else {
+    return 'Good Evening';
+  }
+}
+
