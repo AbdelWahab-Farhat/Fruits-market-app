@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fresh_fruits/core/utility/helper.dart';
 
 import '../../../../../core/utility/app_style.dart';
 import '../../../../../core/utility/size_config.dart';
+import '../../../../auth/presentation/manger/sign_in_cubit/sign_in_cubit.dart';
 
 
 class AppBarSection extends StatelessWidget {
@@ -12,21 +15,21 @@ class AppBarSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var signInCubit = context.read<SignInCubit>();
     return Padding(
-      padding: const EdgeInsets.only(right: 28 ,left: 28,bottom: 23),
+      padding: const EdgeInsets.only(right: 28 ,left: 28,bottom: 23,top: 23),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Good Morning',
-              style: AppStyle.style14
-                  .copyWith(color: const Color(0xff5F5F5F))),
+          Text(getTimeBasedGreeting(),style: AppStyle.style14
+          .copyWith(color: const Color(0xff5F5F5F))),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                   width: SizeConfig.viewWidth! * .7,
                   child: Text(
-                    'Abdelwahab Farhat Ali',
+                    "${signInCubit.customer!.firstName} ${signInCubit.customer!.lastName}",
                     style: AppStyle.style20,
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.ellipsis,
@@ -41,3 +44,4 @@ class AppBarSection extends StatelessWidget {
     );
   }
 }
+
