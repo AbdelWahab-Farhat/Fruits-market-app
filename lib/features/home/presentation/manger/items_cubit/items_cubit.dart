@@ -11,7 +11,7 @@ class ItemsCubit extends Cubit<ItemsState> {
 
   void fetchItems() async {
     emit(ItemsLoading());
-    var result = await fireStoreService.fetchItems();
+    var result = await FireStoreService.fetchItems();
     result.fold(
       (failure) => ItemsFailure(errMessage: failure.errMessage),
       (data) => emit(ItemsSuccess(items: data)),

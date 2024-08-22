@@ -7,7 +7,7 @@ import 'package:fresh_fruits/core/widgets/custom_outlined_button.dart';
 import 'package:fresh_fruits/core/widgets/custom_text_form_field.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
-import '../../viewModel/sign_in_cubit/sign_in_cubit.dart';
+import '../../manger/sign_in_cubit/sign_in_cubit.dart';
 
 class ForgetPasswordViewBody extends StatelessWidget {
   const ForgetPasswordViewBody({super.key});

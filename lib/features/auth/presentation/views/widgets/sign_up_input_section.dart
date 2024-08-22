@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/helper.dart';
-import 'package:fresh_fruits/features/auth/presentation/viewModel/sign_up_cubit/sign_up_cubit.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../manger/sign_up_cubit/sign_up_cubit.dart';
 
 class SignUpInputSection extends StatelessWidget {
   const SignUpInputSection({

@@ -5,7 +5,7 @@ import 'package:fresh_fruits/core/widgets/custom_filled_button.dart';
 import 'package:fresh_fruits/core/widgets/custom_loading_widget.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../core/utility/app_router.dart';
-import '../../viewModel/sign_in_cubit/sign_in_cubit.dart';
+import '../../manger/sign_in_cubit/sign_in_cubit.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({

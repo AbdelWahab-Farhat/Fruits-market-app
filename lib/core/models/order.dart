@@ -15,6 +15,7 @@ class Order extends Item {
     required super.reviews,
     required this.quantity,
     required this.orderDate,
+    required super.description,
   });
 
   @override
@@ -35,7 +36,8 @@ class Order extends Item {
       rate: (json['rate'] as num).toDouble(),
       reviews: (json['reviews'] as num).toInt(),
       quantity: (json['quantity'] as num).toInt(),
-      orderDate: DateTime.parse(json['orderDate']),  // Parse ISO8601 string to DateTime
+      orderDate: DateTime.parse(json['orderDate']),
+      description: json['description'],
     );
   }
 }

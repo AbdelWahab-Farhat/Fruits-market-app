@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/helper.dart';
 
 import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../../viewModel/sign_in_cubit/sign_in_cubit.dart';
+import '../../manger/sign_in_cubit/sign_in_cubit.dart';
 
 class SignInInputSection extends StatelessWidget {
   const SignInInputSection({

@@ -29,6 +29,7 @@ class CustomOutlinedButton extends StatelessWidget {
         ),
         child: Center(
             child: Text(
+              textAlign: TextAlign.center,
               title,
               style: AppStyle.style16
                   .copyWith(color: Colors.black),

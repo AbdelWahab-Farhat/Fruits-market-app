@@ -12,7 +12,7 @@ class CategoriesCubit extends Cubit<CategoriesState> {
 
   Future <void> fetchItems() async {
     emit(CategoriesLoading());
-    var result = await FireStoreService().fetchItems();
+    var result = await FireStoreService.fetchItems();
     result.fold(
       (failure) => emit(CategoriesFailure(errMessage: failure.errMessage)),
       (items) => emit(CategoriesSuccess(items: items)),

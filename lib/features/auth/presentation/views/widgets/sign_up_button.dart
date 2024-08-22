@@ -6,7 +6,7 @@ import '../../../../../core/utility/app_router.dart';
 import '../../../../../core/utility/helper.dart';
 import '../../../../../core/widgets/custom_filled_button.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';
-import '../../viewModel/sign_up_cubit/sign_up_cubit.dart';
+import '../../manger/sign_up_cubit/sign_up_cubit.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({

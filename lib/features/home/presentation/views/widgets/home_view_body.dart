@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/widgets/custom_filled_button.dart';
+import 'package:fresh_fruits/features/auth/presentation/manger/sign_in_cubit/sign_in_cubit.dart';
 import 'package:fresh_fruits/features/home/presentation/manger/items_cubit/items_cubit.dart';
 import 'app_bar_section.dart';
 import 'category_section.dart';
@@ -23,7 +24,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
   }
   @override
   Widget build(BuildContext context) {
-        return const Scaffold(
+    return const Scaffold(
           body: SafeArea(
             child: CustomScrollView(
               slivers: [

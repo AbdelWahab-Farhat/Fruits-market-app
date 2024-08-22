@@ -1,7 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/constants.dart';
+import 'package:fresh_fruits/core/firebase/firestore_service.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
+import 'package:fresh_fruits/core/widgets/custom_loading_widget.dart';
+import 'package:fresh_fruits/features/auth/presentation/manger/sign_in_cubit/sign_in_cubit.dart';
 import 'package:fresh_fruits/features/root/root.dart';
 import 'sign_in_section.dart';
 
@@ -10,12 +14,37 @@ class SignInViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Root();
+      builder: (context, authSnapshot) {
+        if (authSnapshot.hasData) {
+          return FutureBuilder(
+            future: FireStoreService.fetchUserInfo(authSnapshot.data!.uid),
+            builder: (context, userSnapshot) {
+              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                return const Scaffold(body:  CustomLoadingWidget());
+              }
+              if (userSnapshot.hasError) {
+                return const Center(child: Text('Error fetching user data'));
+              }
+
+              if (userSnapshot.hasData && userSnapshot.data != null) {
+                // Update the customer in the Cubit if not already set
+                final customer = userSnapshot.data!;
+                final signInCubit = context.read<SignInCubit>();
+                if (signInCubit.customer == null) {
+                  signInCubit.setCustomer(customer); // Better to use a method within the Cubit to set customer
+                }
+
+                return const Root();
+              }
+
+              return const Center(child: Text('User data not found'));
+            },
+          );
         }
+
+        // Show sign-in screen if the user is not authenticated
         return Scaffold(
           body: SizedBox(
             width: SizeConfig.viewWidth,
@@ -30,20 +59,18 @@ class SignInViewBody extends StatelessWidget {
                     height: SizeConfig.viewHeight! * 0.55,
                     decoration: const BoxDecoration(
                       color: kLightWhite,
-                      borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),
+                      borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          topLeft: Radius.circular(20)),
                     ),
                     child: const SignInSection(),
                   ),
                 ),
-
               ],
             ),
           ),
         );
       },
-
     );
   }
 }
-
-

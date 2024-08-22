@@ -9,8 +9,9 @@ class FireStoreService {
   // Collections Names
   static const items_Collection = 'Items';
   static const users_Collection = 'Users';
+  static const comments_Collection = 'Comments';
 
-  Future<Either<Failure, List<Item>>> fetchItems() async {
+  static Future<Either<Failure, List<Item>>> fetchItems() async {
     try {
       final snapShot =
           await FirebaseFirestore.instance.collection(items_Collection).get();
@@ -24,12 +25,14 @@ class FireStoreService {
     }
   }
 
-  Future<bool> addUserInfoToDataBase(
+  static Future<bool> addUserInfoToDataBase(
       {required String firstName,
       required String lastName,
-      required String email}) async {
+      required String email,
+      required String ID,
+      }) async {
     Customer customer = Customer(
-        ID: const Uuid().v4(),
+        ID: ID,
         firstName: firstName,
         lastName: lastName,
         email: email);
@@ -43,4 +46,15 @@ class FireStoreService {
       return false;
     }
   }
+
+  static Future<Customer> fetchUserInfo(String uid) async {
+    final snapShot = await FirebaseFirestore.instance
+        .collection(users_Collection)
+        .doc(uid)
+        .get();
+    return Customer.fromJson(snapShot.data() as Map<String, dynamic>);
+  }
 }
+
+
+

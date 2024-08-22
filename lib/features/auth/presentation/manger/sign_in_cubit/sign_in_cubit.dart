@@ -2,12 +2,14 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../../core/models/customer.dart';
 import '../../../data/repo/auth_repo.dart';
 
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
   final AuthRepo authRepo;
+  Customer? customer;
   late String email;
   late String password;
   final formKey = GlobalKey<FormState>();
@@ -18,7 +20,10 @@ class SignInCubit extends Cubit<SignInState> {
     var result = await authRepo.signIn(email: email, password: password);
     result.fold(
       (errMessage) => emit(SignInFailure(errMessage.errMessage)),
-      (successMessage) => emit(SignInSuccess(successMessage: successMessage)),
+      (customer) {
+        customer = customer;
+        emit(SignInSuccess(successMessage: 'Sign In Successful'));
+      },
     );
   }
   Future<void> sendEmailResetPassword({required String email}) async {
@@ -28,5 +33,9 @@ class SignInCubit extends Cubit<SignInState> {
       (errMessage) => emit(SignInFailure(errMessage.errMessage)),
       (successMessage) => emit(SignInSuccess(successMessage: successMessage)),
     );
+  }
+
+  void setCustomer(Customer customer) {
+    customer = customer;
   }
 }
