@@ -10,6 +10,7 @@ class FireStoreService {
   static const items_Collection = 'Items';
   static const users_Collection = 'Users';
   static const comments_Collection = 'Comments';
+  static const Cart_Collection = 'Cart';
 
   static Future<Either<Failure, List<Item>>> fetchItems() async {
     try {
