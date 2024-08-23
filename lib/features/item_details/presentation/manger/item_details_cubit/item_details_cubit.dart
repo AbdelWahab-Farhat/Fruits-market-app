@@ -1,17 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fresh_fruits/core/firebase/firestore_service.dart';
 import 'package:fresh_fruits/features/item_details/data/repo/item_details_repo.dart';
 import 'package:meta/meta.dart';
-
 import '../../../../../core/models/customer.dart';
 import '../../../../../core/models/item.dart';
-import '../../../data/models/comment.dart';
 
 part 'item_details_state.dart';
 
 class ItemDetailsCubit extends Cubit<ItemDetailsState> {
-  final Item item;
+  Item item;
   final ItemDetailsRepo itemDetailsRepo;
-  List<Comment>? itemComments;
   int quantity = 1;
   ItemDetailsCubit({required this.itemDetailsRepo, required this.item})
       : super(ItemDetailsInitial());
@@ -40,28 +39,19 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
     }
   }
 
-  void postComment(String content, Customer customer) async {
-    emit(ItemDetailsCommentLoading());
-    var result = await itemDetailsRepo.postComment(content, customer, item);
-    result.fold(
-      (failure) =>
-          emit(ItemDetailsCommentFailed(errMessage: failure.errMessage)),
-      (successMessage) {
-        emit(ItemDetailsCommentPosted(successMessage: successMessage));
-      },
-    );
-      await fetchComments();
-  }
 
-  Future<void> fetchComments() async {
-    emit(ItemDetailsCommentLoading());
-      var result = await itemDetailsRepo.getItemComments(item);
+    Future<void> updatedItem()async {
+    var query = await FirebaseFirestore.instance.collection(FireStoreService.items_Collection).doc(item.ID).get();
+    item = Item.fromJson(query.data() as Map<String, dynamic>);
+      emit(ItemDetailsInitial());
+    }
+
+    Future<void> addItemToCart (Customer customer) async {
+      var result = await itemDetailsRepo.addItemToCart(item, quantity,customer);
       result.fold(
-        (failure) =>
-            emit(ItemDetailsCommentFailed(errMessage: failure.errMessage)),
-        (comments) {
-          itemComments = comments;
-          emit((ItemDetailsCommentPosted(successMessage: '')));
+        (failure) => emit(ItemDetailsFailed(errMessage: failure.errMessage)),
+        (successMessage) {
+          emit(ItemDetailsSuccess(successMessage: successMessage));
         },
       );
     }

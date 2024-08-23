@@ -8,5 +8,8 @@ import '../../../../core/models/item.dart';
 abstract class ItemDetailsRepo {
   Future<Either<Failure, String>> postComment(String content , Customer customer,Item item);
   Future<Either<Failure, List<Comment>?>> getItemComments(Item item);
+  Future<Either<Failure,String>> ratingItem(Item item,double rate);
+  Future<Either<Failure,String>> addItemToCart(Item item, int quantity,Customer customer);
+
 }
 

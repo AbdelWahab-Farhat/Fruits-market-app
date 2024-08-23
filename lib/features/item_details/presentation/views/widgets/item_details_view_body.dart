@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/size_config.dart';
+import 'package:fresh_fruits/features/item_details/presentation/manger/item_details_cubit/item_details_cubit.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/widgets/review_widget.dart';
 import '../../../../../core/widgets/custom_bottom_sheet.dart';
 import '../../../../../core/widgets/price_section.dart';
@@ -7,9 +9,19 @@ import '../../../../../core/widgets/title_section.dart';
 import 'custom_tab_bar.dart';
 import 'header_section.dart';
 
-class ItemDetailsViewBody extends StatelessWidget {
+class ItemDetailsViewBody extends StatefulWidget {
   const ItemDetailsViewBody({super.key});
 
+  @override
+  State<ItemDetailsViewBody> createState() => _ItemDetailsViewBodyState();
+}
+
+class _ItemDetailsViewBodyState extends State<ItemDetailsViewBody> {
+  @override
+  void initState() {
+    context.read<ItemDetailsCubit>().updatedItem();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

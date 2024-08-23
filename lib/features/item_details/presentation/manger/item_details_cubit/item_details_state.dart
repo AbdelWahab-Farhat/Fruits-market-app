@@ -4,12 +4,12 @@ part of 'item_details_cubit.dart';
 sealed class ItemDetailsState {}
 
 final class ItemDetailsInitial extends ItemDetailsState {}
-final class ItemDetailsCommentPosted extends ItemDetailsState {
+final class ItemDetailsSuccess extends ItemDetailsState {
   final String successMessage;
-  ItemDetailsCommentPosted({required this.successMessage});
+  ItemDetailsSuccess({required this.successMessage});
 }
-final class ItemDetailsCommentFailed extends ItemDetailsState {
+final class ItemDetailsFailed extends ItemDetailsState {
   final String errMessage;
-  ItemDetailsCommentFailed({required this.errMessage});
+  ItemDetailsFailed({required this.errMessage});
 }
-final class ItemDetailsCommentLoading extends ItemDetailsState {}
+final class ItemDetailsLoading extends ItemDetailsState {}
