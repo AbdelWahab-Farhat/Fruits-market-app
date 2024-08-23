@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/helper.dart';
 import 'package:fresh_fruits/core/widgets/custom_loading_widget.dart';
+import 'package:fresh_fruits/features/item_details/presentation/manger/comment_cubit/comment_cubit.dart';
 import 'package:fresh_fruits/features/item_details/presentation/manger/item_details_cubit/item_details_cubit.dart';
 import '../../../../auth/presentation/manger/sign_in_cubit/sign_in_cubit.dart';
 import 'comment_text_field.dart';
@@ -22,36 +23,37 @@ class _CommentSectionState extends State<CommentSection> {
   }
 
   void _fetchComments() {
-    final itemDetailsCubit = context.read<ItemDetailsCubit>();
-    itemDetailsCubit.fetchComments();
+    final item = context.read<ItemDetailsCubit>().item;
+    final commentCubit = context.read<CommentCubit>();
+    commentCubit.fetchComments(item);
   }
 
   @override
   Widget build(BuildContext context) {
-    final itemDetailsCubit = context.read<ItemDetailsCubit>();
+    final commentCubit = context.read<CommentCubit>();
     final signInCubit = context.read<SignInCubit>();
 
     return Column(
       children: [
         Expanded(
-          child: _buildCommentList(itemDetailsCubit),
+          child: _buildCommentList(commentCubit),
         ),
-        _buildCommentInput(itemDetailsCubit, signInCubit),
+        _buildCommentInput(commentCubit, signInCubit),
       ],
     );
   }
 
-  Widget _buildCommentList(ItemDetailsCubit itemDetailsCubit) {
-    return BlocBuilder<ItemDetailsCubit, ItemDetailsState>(
+  Widget _buildCommentList(CommentCubit commentCubit) {
+    return BlocBuilder<CommentCubit, CommentState>(
       builder: (context, state) {
-        if (itemDetailsCubit.itemComments == null || itemDetailsCubit.itemComments!.isEmpty) {
+        if (commentCubit.itemComments == null || commentCubit.itemComments!.isEmpty) {
           return const Center(child: Text('No Comments Yet'));
         }
         return ListView.builder(
           physics: const BouncingScrollPhysics(),
-          itemCount: itemDetailsCubit.itemComments!.length,
+          itemCount: commentCubit.itemComments!.length,
           itemBuilder: (context, index) {
-            final comment = itemDetailsCubit.itemComments![index];
+            final comment = commentCubit.itemComments![index];
             return CommentWidget(
               userName: comment.customerName,
               comment: comment.content,
@@ -62,25 +64,25 @@ class _CommentSectionState extends State<CommentSection> {
     );
   }
 
-  Widget _buildCommentInput(ItemDetailsCubit itemDetailsCubit, SignInCubit signInCubit) {
-    return BlocConsumer<ItemDetailsCubit, ItemDetailsState>(
+  Widget _buildCommentInput(CommentCubit commentCubit, SignInCubit signInCubit) {
+    return BlocConsumer<CommentCubit, CommentState>(
       listener: (context, state) {
-        if (state is ItemDetailsCommentPosted) {
+        if (state is CommentPosted) {
           if (state.successMessage == '') {
             return;
           }
           showTopSnackBar(context, "Your Review Added Successfully");
-        } else if (state is ItemDetailsCommentFailed) {
+        } else if (state is CommentFailed) {
           showTopSnackBar(context, state.errMessage);
         }
       },
       builder: (context, state) {
-        if (state is ItemDetailsCommentLoading) {
+        if (state is CommentLoading) {
           return const CustomLoadingWidget();
         }
         return CommentInputWidget(
           onCommentSubmitted: (content) {
-            itemDetailsCubit.postComment(content, signInCubit.customer!);
+            commentCubit.postComment(content, signInCubit.customer!, context.read<ItemDetailsCubit>().item);
           },
         );
       },

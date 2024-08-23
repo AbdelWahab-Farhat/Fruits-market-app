@@ -1,5 +1,3 @@
-import 'package:fresh_fruits/core/models/item.dart';
-import 'package:uuid/uuid.dart';
 
 class CategoryItem {
   final String name;

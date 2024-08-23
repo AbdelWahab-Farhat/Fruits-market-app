@@ -1,16 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fresh_fruits/core/models/item.dart';
 import 'package:fresh_fruits/core/widgets/custom_outlined_button.dart';
-import 'package:fresh_fruits/features/item_details/presentation/views/widgets/comment_text_field.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/widgets/rating_section.dart';
-
+import 'package:go_router/go_router.dart';
 import '../../../../../constants.dart';
 import '../../../../../core/utility/app_style.dart';
+import '../../../../../core/utility/helper.dart';
+import '../../../../../core/widgets/custom_loading_widget.dart';
+import '../../../../auth/presentation/manger/sign_in_cubit/sign_in_cubit.dart';
 import '../../manger/item_details_cubit/item_details_cubit.dart';
 import 'comment_section.dart';
-import 'comment_widget.dart';
 
 class CustomTabBar extends StatelessWidget {
   const CustomTabBar({
@@ -19,9 +18,7 @@ class CustomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var item = context
-        .read<ItemDetailsCubit>()
-        .item;
+    var item = context.read<ItemDetailsCubit>().item;
     return DefaultTabController(
       length: 3,
       child: Column(
@@ -38,14 +35,14 @@ class CustomTabBar extends StatelessWidget {
               Tab(text: 'Rating'),
             ],
           ),
-          Expanded(
+          const Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(),
+              padding: EdgeInsets.only(),
               child: TabBarView(
                 children: [
-                  PayDesSection(item: item),
-                  const CommentSection(),
-                  const RatingSection(),
+                  PayDesSection(),
+                  CommentSection(),
+                  RatingSection(),
                 ],
               ),
             ),
@@ -59,29 +56,50 @@ class CustomTabBar extends StatelessWidget {
 class PayDesSection extends StatelessWidget {
   const PayDesSection({
     super.key,
-    required this.item,
   });
-
-  final Item item;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ItemDetailsCubit, ItemDetailsState>(
+    var itemCubit = context.read<ItemDetailsCubit>();
+    var signInCubit = context.read<SignInCubit>();
+    return BlocConsumer<ItemDetailsCubit, ItemDetailsState>(
+      listener: (context, state) {
+        if (state is ItemDetailsSuccess) {
+          showTopSnackBar(context, "Item Added To Cart Successfully");
+          GoRouter.of(context).pop();
+        }
+        if (state is ItemDetailsFailed) {
+          showTopSnackBar(context, state.errMessage);
+        }
+      },
       builder: (context, state) {
-        var itemCubit = context.read<ItemDetailsCubit>();
+        if (state is ItemDetailsLoading) {
+          return const CustomLoadingWidget();
+        }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20,),
-            Text(item.description!, style: AppStyle.style14, maxLines: 4,),
-            Spacer(),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              itemCubit.item.description!,
+              style: AppStyle.style14,
+              maxLines: 4,
+            ),
+            const Spacer(),
             CustomOutlinedButton(
-              title: 'Payment\n \$${item.price * itemCubit.quantity}', onTap: () {},),
-            const SizedBox(height: 20,),
+              title: 'Payment\n \$${itemCubit.item.price * itemCubit.quantity}',
+              onTap: () async {
+                await itemCubit.addItemToCart(signInCubit.customer!);
+              },
+            ),
+            const SizedBox(
+              height: 20,
+            ),
           ],
         );
       },
     );
   }
 }
-
