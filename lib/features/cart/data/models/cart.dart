@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fresh_fruits/features/cart/presentation/manger/cart_cubit/cart_cubit.dart';
+
 import '../../../../core/models/category_item.dart';
 import '../../../../core/models/item.dart';
 
 class Cart extends Item {
-  final int quantity;
+   int quantity;
   final String customerID;
   Cart(
       {required super.ID,
@@ -35,5 +39,10 @@ class Cart extends Item {
       description: json['description'],
       customerID: json['customerID'],
     );
+  }
+
+  totalPrice() => price * quantity;
+  removeItem(BuildContext context) {
+    return context.read<CartCubit>().removeItemFromCart(this);
   }
 }
