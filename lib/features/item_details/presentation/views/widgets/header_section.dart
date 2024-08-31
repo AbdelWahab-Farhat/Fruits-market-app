@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/features/item_details/presentation/manger/item_details_cubit/item_details_cubit.dart';
 
-import '../../../../../core/models/item.dart';
 import 'app_bar_tools.dart';
 import 'custom_item_image.dart';
 import 'custom_page_ind.dart';
