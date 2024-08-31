@@ -3,10 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../constants.dart';
 import '../../../../../core/utility/app_style.dart';
+import '../../../data/models/cart.dart';
+import '../../manger/cart_cubit/cart_cubit.dart';
 
 class QuantityCart extends StatelessWidget {
+  final Cart item;
   const QuantityCart({
     super.key,
+    required this.item,
   });
 
   @override
@@ -14,10 +18,10 @@ class QuantityCart extends StatelessWidget {
     return Row(
       children: [
         GestureDetector(
-          // onTap: itemDetailsCubit.quantityDecrement,
+          onTap: () => context.read<CartCubit>().quantityDecrement(item),
           child: const Icon(
             Icons.remove,
-            size: 30,
+            size: 20,
             color: kLightYellow,
           ),
         ),
@@ -25,17 +29,16 @@ class QuantityCart extends StatelessWidget {
         SizedBox(
             width: 40,
             child: Text(
-              0.0.toString(),
-              // itemDetailsCubit.quantity.toString(),
+              item.quantity.toString(),
               style: AppStyle.style20.copyWith(fontWeight: FontWeight.w500),
               textAlign: TextAlign.center,
             )),
         const SizedBox(width: 10),
         GestureDetector(
-          // onTap: itemDetailsCubit.quantityIncrement,
+          onTap: () => context.read<CartCubit>().quantityIncrement(item),
           child: const Icon(
             Icons.add,
-            size: 30,
+            size: 20,
             color: kLightYellow,
           ),
         ),

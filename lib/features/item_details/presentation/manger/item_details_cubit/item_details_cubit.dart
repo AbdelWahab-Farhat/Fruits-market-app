@@ -39,7 +39,6 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
     }
   }
 
-
     Future<void> updatedItem()async {
     var query = await FirebaseFirestore.instance.collection(FireStoreService.items_Collection).doc(item.ID).get();
     item = Item.fromJson(query.data() as Map<String, dynamic>);
@@ -47,6 +46,7 @@ class ItemDetailsCubit extends Cubit<ItemDetailsState> {
     }
 
     Future<void> addItemToCart (Customer customer) async {
+      emit(ItemDetailsLoading());
       var result = await itemDetailsRepo.addItemToCart(item, quantity,customer);
       result.fold(
         (failure) => emit(ItemDetailsFailed(errMessage: failure.errMessage)),
