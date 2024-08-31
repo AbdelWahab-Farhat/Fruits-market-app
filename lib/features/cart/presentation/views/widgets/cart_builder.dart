@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fresh_fruits/core/utility/app_style.dart';
-import 'package:fresh_fruits/core/utility/size_config.dart';
-
 import '../../../../../core/utility/helper.dart';
 import '../../../../../core/widgets/custom_error_widget.dart';
 import '../../../../../core/widgets/custom_loading_widget.dart';

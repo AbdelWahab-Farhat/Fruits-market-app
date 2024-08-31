@@ -6,6 +6,7 @@ import 'package:fresh_fruits/features/cart/presentation/views/cart_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/categories_view.dart';
 import 'package:fresh_fruits/features/categories/presentation/views/category_view.dart';
 import 'package:fresh_fruits/features/home/presentation/views/home_view.dart';
+import 'package:fresh_fruits/features/home/presentation/views/more_view.dart';
 import 'package:fresh_fruits/features/item_details/presentation/views/item_details_view.dart';
 import 'package:fresh_fruits/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fresh_fruits/features/profile/presentation/views/profile_view.dart';
@@ -20,6 +21,7 @@ abstract class AppRouter {
   static const String signInViewPath = '/sign_in_view';
   static const String signUpViewPath = '/sign_up_view';
   static const String homeView = '/home_view';
+  static const String moreView= '/more_view';
   static const String categoriesView = '/categories_view';
   static const String categoryView = '/category_view';
   static const String itemDetailsView = '/item_details_view';
@@ -57,6 +59,14 @@ abstract class AppRouter {
         builder: (context, state) => const HomeView(),
       ),
       GoRoute(
+
+        path: moreView,
+        builder: (context, state) {
+          final items = state.extra as List<Item>?;
+          return  MoreView(items: items ?? []);
+        },
+      ),
+      GoRoute(
         path: categoriesView,
         builder: (context, state) => const CategoriesView(),
       ),
@@ -85,6 +95,7 @@ abstract class AppRouter {
       GoRoute(
         path: profileView,
         builder: (context, state) =>  const ProfileView(),
-      ),    ],
+      ),
+    ],
   );
 }
