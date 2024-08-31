@@ -57,11 +57,19 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<Either<Failure, Customer>> signIn({required String email, required String password}) async {
     try {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          return left(ServerFailure(errMessage: 'No user found for that email.'));
+        } else if (e.code == 'wrong-password') {
+          return left(ServerFailure(errMessage: 'Wrong password provided for that user.'));
+        }
+      }
       var doc = await FirebaseFirestore.instance.collection(FireStoreService.users_Collection).doc(FirebaseAuth.instance.currentUser!.uid).get();
       return right(Customer.fromJson(doc.data() as Map<String, dynamic>));
-    } on FirebaseAuthException {
+    } on FirebaseException {
       return left(ServerFailure(errMessage: 'An unknown error occurred , Please Try Again Later.'));
-
     }
   }
 
